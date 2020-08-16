@@ -1,0 +1,11 @@
+<h1>Create your Task</h1>
+
+<%= form_with(model: @new_task) do |f| %>
+  <%= f.text_field :title, id: 'task-input'  %>
+
+  <%= f.submit 'Save' %>
+<% end %>
+
+<div id="tasks">
+  <%= render @tasks  %>
+</div>

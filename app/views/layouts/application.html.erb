@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <div id='timestamp' data-turbolinks-permanent>
+      <%= Time.now  %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
