@@ -5,6 +5,9 @@ class TasksController < ApplicationController
     @new_task  = Task.new
   end
 
+  # @todo - use full turbolinks. Redirecting to index
+  #       - remove the create.js.erb file
+  #       - use redirect_to action: :index
   def create
     title = params[:task][:title]
 
