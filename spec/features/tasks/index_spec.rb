@@ -18,8 +18,7 @@ describe 'Index', type: :feature, js: true do
         find_by_id('task-input').set('Hello')
         click_on 'Save'
 
-        sleep(2)
-        expect(page).to have_text 'Hello'
+        expect(page).to have_selector 'li.task-item', text: 'Hello'
       end
       end
     end
