@@ -11,7 +11,9 @@ class TasksController < ApplicationController
   def create
     title = params[:task][:title]
 
-    @task = Task.new(title: title).tap(&:save!)
+    Task.new(title: title).tap(&:save!)
+
+    redirect_to action: :index
   end
 
   def show

@@ -15,3 +15,21 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+
+// Testing listeners
+
+document.addEventListener("turbolinks:request-start", function(event){
+  var xhr = event.data.xhr
+  console.log('---')
+// console.log(xhr)
+  console.log('Updating')
+// xhr.setRequestHeader('X-Request-Id2', '123');
+// console.log(xhr)
+})
+//
+// document.addEventListener("turbolinks:request-end", function(event){
+//   var xhr = event.data.xhr
+// console.log('--END-')
+// console.log(xhr)
+// })
