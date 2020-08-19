@@ -1,1 +1,11 @@
-<li class="task-item"><%= task.title %> <%= link_to 'Details', task, remote: false  %></li>
+<li>
+  <div class="view">
+    <input type="checkbox" class="toggle" />
+
+    <label>
+      <%= task.title %>
+    </label>
+
+    <%= link_to '', task, remote: false, class: 'destroy'  %>
+  </div>
+</li>

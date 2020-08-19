@@ -1,11 +1,34 @@
-<h1>Create your Task</h1>
+<header class="header">
+  <h1>Todos</h1>
 
-<%= form_with(model: @new_task) do |f| %>
-  <%= f.text_field :title, id: 'task-input'  %>
+  <%= form_with(model: @new_task) do |f| %>
+    <%= f.text_field :title, id: 'task-input', class: 'new-todo', placeholder: 'What needs to be done?' %>
 
-  <%= f.submit 'Save' %>
-<% end %>
+    <%= f.submit 'Save', class: 'hidden' %>
+  <% end %>
+</header>
 
-<div id="tasks">
-  <%= render @tasks  %>
-</div>
+<section class="main">
+  <ul class="todo-list">
+    <%= render @tasks  %>
+  </ul>
+</section>
+
+<footer class="footer">
+  <!-- This should be `0 items left` by default -->
+  <span class="todo-count"><strong>0</strong> item left</span>
+  <!-- Remove this if you don't implement routing -->
+  <ul class="filters">
+    <li>
+      <a class="selected" href="#/">All</a>
+    </li>
+    <li>
+      <a href="#/active">Active</a>
+    </li>
+    <li>
+      <a href="#/completed">Completed</a>
+    </li>
+  </ul>
+  <!-- Hidden if no completed items are left ↓ -->
+  <button class="clear-completed">Clear completed</button>
+</footer>

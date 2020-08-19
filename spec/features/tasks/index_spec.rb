@@ -7,20 +7,9 @@ describe 'Index', type: :feature, js: true do
       visit '/tasks'
     end
 
-    it 'render input form' do
-      expect(page).to have_content('Create your Task')
-      expect(page).to have_selector '#task-input'
-    end
-
-    context 'when fill the input form' do
-      context 'when submit' do
-      it 'render the created Task' do
-        find_by_id('task-input').set('Hello')
-        click_on 'Save'
-
-        expect(page).to have_selector 'li.task-item', text: 'Hello'
-      end
-      end
+    it 'renders clear state of index page' do
+      expect(page).to have_selector 'form input#task-input'
+      expect(page).to have_selector 'ul.todo-list'
     end
   end
 end
