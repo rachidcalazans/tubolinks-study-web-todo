@@ -6,6 +6,6 @@
       <%= task.title %>
     </label>
 
-    <%= link_to '', task, remote: false, class: 'destroy'  %>
+    <%= link_to '', task_path(task), method: :delete, remote: true, class: 'destroy', data: { 'task-id': task.id }  %>
   </div>
 </li>

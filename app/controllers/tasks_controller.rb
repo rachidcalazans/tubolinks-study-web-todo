@@ -19,4 +19,12 @@ class TasksController < ApplicationController
   def show
     @task = Task.first
   end
+
+  def destroy
+    task = Task.find params[:id]
+
+    task.destroy
+
+    redirect_to action: :index
+  end
 end

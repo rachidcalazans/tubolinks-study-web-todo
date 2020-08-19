@@ -16,6 +16,7 @@ describe 'Create', type: :feature, js: true do
           page.execute_script 'document.getElementsByTagName(\'form\')[0].submit()'
 
           expect(page).to have_selector 'li label', text: 'Hello'
+          expect(page).to have_selector 'li a.destroy[data-task-id]', visible: false
           expect(page).to have_selector 'li a.destroy', visible: false
           expect(page).to have_selector 'li input.toggle', visible: false
         end
