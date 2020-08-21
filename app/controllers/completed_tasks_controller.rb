@@ -1,8 +1,26 @@
 class CompletedTasksController < ApplicationController
-  def create
-    Task.find(params[:task_id]).mark_as_completed
+  before_action :set_task
 
-    render status: :created, json: {}.to_json
+  def create
+    @task.mark_as_completed
+
+    render_with(:created)
   end
+
+  def destroy
+    @task.mark_as_active
+
+    render_with(:ok)
+  end
+
+  private
+
+    def set_task
+      @task = Task.find(params[:id])
+    end
+
+    def render_with(status, json = {})
+      render status: status, json: json.to_json
+    end
 end
 

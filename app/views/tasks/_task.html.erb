@@ -4,6 +4,7 @@
            <%= task.completed? ? 'checked' : '' %>
            class="toggle task-marker"
            data-task-id="<%= task.id %>"
+           data-task-action="<%= task.completed? ? 'destroy' : 'create' %>"
     />
 
     <label>

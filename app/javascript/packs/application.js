@@ -21,13 +21,30 @@ function handleClick(event) {
   var el = event.target
   var includes_task_marker = el.className.includes('task-marker')
   if (includes_task_marker) {
-    var taskId = el.dataset.taskId
+    var taskId     = el.dataset.taskId
+    var taskAction = el.dataset.taskAction
 
-    fetch('/completed_tasks', {
+var actions = {
+  'create': {
+    url: '/completed_tasks',
+    options: {
+      body: JSON.stringify({id: taskId}),
       method: 'post',
       headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({task_id: taskId})
-    }).then(function(response) {
+    }
+  },
+  'destroy': {
+    url: `/completed_tasks/${taskId}`,
+    options: {
+      method: 'delete',
+    }
+  },
+}
+
+action = actions[taskAction]
+
+fetch(action.url, action.options)
+    .then(function(response) {
       Turbolinks.clearCache()
       Turbolinks.visit(window.location)
     })
