@@ -17,7 +17,31 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 
+function handleClick(event) {
+  var el = event.target
+  var includes_task_marker = el.className.includes('task-marker')
+  if (includes_task_marker) {
+    var taskId = el.dataset.taskId
+
+    fetch('/completed_tasks', {
+      method: 'post',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({task_id: taskId})
+    }).then(function(response) {
+      Turbolinks.clearCache()
+      Turbolinks.visit(window.location)
+    })
+  }
+}
+
+window.onload = function(){
+  window.addEventListener('click', handleClick, false);
+}
+
 // Testing listeners
+document.addEventListener("turbolinks:load", function(event){
+
+})
 
 document.addEventListener("turbolinks:request-start", function(event){
   var xhr = event.data.xhr
