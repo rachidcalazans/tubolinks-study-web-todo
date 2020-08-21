@@ -1,6 +1,10 @@
-<li class="<%= task.completed? ? "completed" : ''  %>">
+<li data-controller="task-toggle"
+    class="<%= task.completed? ? "completed" : ''  %>">
   <div class="view">
-    <input type="checkbox"
+    <input
+           data-target="task-toggle.toggler"
+           data-action="task-toggle#toggle"
+           type="checkbox"
            <%= task.completed? ? 'checked' : '' %>
            class="toggle task-marker"
            data-task-id="<%= task.id %>"

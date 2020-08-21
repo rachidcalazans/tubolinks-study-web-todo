@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("./stimulus")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -16,44 +17,6 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-
-function handleClick(event) {
-  var el = event.target
-  var includes_task_marker = el.className.includes('task-marker')
-  if (includes_task_marker) {
-    var taskId     = el.dataset.taskId
-    var taskAction = el.dataset.taskAction
-
-var actions = {
-  'create': {
-    url: '/completed_tasks',
-    options: {
-      body: JSON.stringify({id: taskId}),
-      method: 'post',
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-    }
-  },
-  'destroy': {
-    url: `/completed_tasks/${taskId}`,
-    options: {
-      method: 'delete',
-    }
-  },
-}
-
-action = actions[taskAction]
-
-fetch(action.url, action.options)
-    .then(function(response) {
-      Turbolinks.clearCache()
-      Turbolinks.visit(window.location)
-    })
-  }
-}
-
-window.onload = function(){
-  window.addEventListener('click', handleClick, false);
-}
 
 // Testing listeners
 document.addEventListener("turbolinks:load", function(event){
