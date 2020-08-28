@@ -9,6 +9,7 @@ require 'rspec/rails'
 
 require 'capybara/rspec'
 require 'selenium/webdriver'
+require_relative './helpers/feature/submit_form'
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -49,6 +50,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include ::Helpers::SubmitForm, type: :feature
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

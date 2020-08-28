@@ -1,5 +1,6 @@
-<li data-controller="task-toggle"
-    class="<%= task.completed? ? "completed" : ''  %>">
+<li data-controller="task-toggle task-inline-editor"
+    class="<%= task.completed? ? "completed" : ''  %>"
+>
   <div class="view">
     <input
            data-target="task-toggle.toggler"
@@ -11,10 +12,17 @@
            data-task-action="<%= task.completed? ? 'destroy' : 'create' %>"
     />
 
-    <label>
+    <label id="<%= dom_id(task) %>" data-action="dblclick->task-inline-editor#showForm">
       <%= task.title %>
     </label>
 
     <%= link_to '', task_path(task), method: :delete, remote: true, class: 'destroy', data: { 'task-id': task.id }  %>
   </div>
+
+  <%= form_with(model: task, id: dom_id(task, :edit)) do |f| %>
+    <%= f.text_field :title, class: 'edit', data: {
+      target: 'task-inline-editor.textField',
+      action: 'keydown->task-inline-editor#handleKeyDown'
+    } %>
+  <% end %>
 </li>
