@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[update destroy]
 
   def index
-    @tasks = Task.all
+    @task_filter = params[:task_filter] ? params[:task_filter] : 'all'
+
+    @tasks     = Task.filter_by(@task_filter)
     @new_task  = Task.new
   end
 
