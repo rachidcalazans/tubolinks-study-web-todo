@@ -15,6 +15,8 @@ describe 'Index', type: :feature, js: true do
 
   end
 
+  let(:completed_task) { Task.create(title: 'Task completed', completed_at: Date.new) }
+
   context 'shows active tasks counter' do
     before do
       completed_task
@@ -22,8 +24,6 @@ describe 'Index', type: :feature, js: true do
 
       visit '/tasks'
     end
-
-    let(:completed_task) { Task.create(title: 'Completed task', completed_at: Date.new) }
 
     context 'when there are no active tasks' do
       let(:active_tasks) {}
@@ -67,7 +67,6 @@ describe 'Index', type: :feature, js: true do
       end
 
       let(:active_task)    { Task.create(title: 'Task active') }
-      let(:completed_task) { Task.create(title: 'Task completed', completed_at: Date.new) }
 
       context 'when click on :all tab' do
         before do

@@ -30,5 +30,9 @@
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
-  <button class="clear-completed">Clear completed</button>
+  <% if @completed_tasks_count > 0 %>
+    <%= form_with(url: completed_task_cleanings_path) do |f| %>
+      <%= f.button 'Clear completed', type: 'submit', class: 'clear-completed' %>
+    <% end %>
+  <% end %>
 </footer>
