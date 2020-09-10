@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @task_filter = params[:task_filter] ? params[:task_filter] : 'all'
+    @active_tasks_count = Task.active.count
 
     @tasks     = Task.filter_by(@task_filter)
     @new_task  = Task.new
