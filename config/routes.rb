@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :tasks, except: %i[edit new show]
   resources :completed_task_cleanings, only: %i[create]
   resources :completed_tasks, only: %i[create destroy]
+
+  get 'active_tasks/tray', to: 'active_tasks#tray', as: 'active_tasks_tray'
+  get 'completed_tasks/tray', to: 'completed_tasks#tray', as: 'completed_tasks_tray'
 end

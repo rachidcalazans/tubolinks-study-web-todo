@@ -1,0 +1,5 @@
+<% if @completed_tasks_count > 0 %>
+  <%= form_with(url: completed_task_cleanings_path) do |f| %>
+    <%= f.button 'Clear completed', type: 'submit', class: 'clear-completed' %>
+  <% end %>
+<% end %>

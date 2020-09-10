@@ -1,5 +1,10 @@
 class CompletedTasksController < ApplicationController
-  before_action :set_task
+  before_action :set_task, except: %i[tray]
+
+  def tray
+    @completed_tasks_count = Task.completed.count
+    render layout: false
+  end
 
   def create
     @task.mark_as_completed
