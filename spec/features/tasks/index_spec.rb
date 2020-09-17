@@ -12,6 +12,49 @@ describe 'Index', type: :feature, js: true do
       expect(page).to have_selector 'form input#task-input'
       expect(page).to have_selector 'ul.todo-list'
     end
+
+  end
+
+  let(:completed_task) { Task.create(title: 'Task completed', completed_at: Date.new) }
+
+  context 'shows active tasks counter' do
+    before do
+      completed_task
+      active_tasks
+
+      visit '/tasks'
+    end
+
+    context 'when there are no active tasks' do
+      let(:active_tasks) {}
+
+      it 'shows the correct count of active tasks' do
+        expect_to_see_number_of_items_left(expected_count: 0, expected_text: '0 items left')
+      end
+    end
+
+    context 'when there is one active task' do
+      let(:active_tasks) { Task.create(title: 'Single active task') }
+
+      it 'shows the correct count of active tasks' do
+        expect_to_see_number_of_items_left(expected_count: 1, expected_text: '1 item left')
+      end
+    end
+
+    context 'when there are more than one active tasks' do
+      let(:active_tasks) do
+        Task.create(title: 'First active task')
+        Task.create(title: 'Second active task')
+      end
+
+      it 'shows the correct count of active tasks' do
+        expect_to_see_number_of_items_left(expected_count: 2, expected_text: '2 items left')
+      end
+    end
+
+    def expect_to_see_number_of_items_left(expected_count: 0, expected_text: '')
+      expect(page).to have_selector ".footer .todo-count", text: expected_text
+    end
   end
 
   describe 'navigating tabs' do
@@ -24,7 +67,6 @@ describe 'Index', type: :feature, js: true do
       end
 
       let(:active_task)    { Task.create(title: 'Task active') }
-      let(:completed_task) { Task.create(title: 'Task completed', completed_at: Date.new) }
 
       context 'when click on :all tab' do
         before do

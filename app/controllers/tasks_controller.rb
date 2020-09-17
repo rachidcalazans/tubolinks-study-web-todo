@@ -6,6 +6,8 @@ class TasksController < ApplicationController
 
     @tasks     = Task.filter_by(@task_filter)
     @new_task  = Task.new
+    @active_tasks_count = Task.active.count
+    @completed_tasks_count = Task.completed.count
   end
 
   def create
@@ -28,11 +30,11 @@ class TasksController < ApplicationController
 
   private
 
-    def set_task
-      @task = Task.find params[:id]
-    end
+  def set_task
+    @task = Task.find params[:id]
+  end
 
-    def task_params
-      params.require(:task).permit(:title)
-    end
+  def task_params
+    params.require(:task).permit(:title)
+  end
 end

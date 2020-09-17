@@ -16,7 +16,7 @@
 
 <footer class="footer">
   <!-- This should be `0 items left` by default -->
-  <span class="todo-count"><strong>0</strong> item left</span>
+  <span class="todo-count"><strong><%= @active_tasks_count %></strong> <%= "item".pluralize @active_tasks_count %> left</span>
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
     <li>
@@ -30,5 +30,9 @@
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
-  <button class="clear-completed">Clear completed</button>
+  <% if @completed_tasks_count > 0 %>
+    <%= form_with(url: completed_task_cleanings_path) do |f| %>
+      <%= f.button 'Clear completed', type: 'submit', class: 'clear-completed' %>
+    <% end %>
+  <% end %>
 </footer>

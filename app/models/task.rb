@@ -1,10 +1,10 @@
 class Task < ApplicationRecord
 
-  scope :actives,   ->() { where(completed_at: nil) }
+  scope :active,   ->() { where(completed_at: nil) }
   scope :completed, ->() { where.not(completed_at: nil) }
   scope :filter_by, ->(task_filter) {
     return completed if task_filter == 'completed'
-    return actives   if task_filter == 'active'
+    return active   if task_filter == 'active'
 
     all
   }
